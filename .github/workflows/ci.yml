@@ -86,7 +86,7 @@
             with:
                 input_path: infra/cdk.out/vams-CfnNagTest-us-east-1.template.json
 
-          - name: run checks
+          - name: Run checks
             working-directory: backend
             run: make all
           
