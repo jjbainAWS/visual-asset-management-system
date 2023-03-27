@@ -117,6 +117,7 @@
           - name: Tear Down VAMS
             working-directory: infra
             run: |
+                export STACK_NAME=DeploymentTest
                 npm install -g aws-cdk
                 cdk destroy --all --force
                 aws lambda invoke --function-name TearDownVAMSRetainedResources response.json
