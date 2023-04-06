@@ -35,7 +35,7 @@
             uses: actions/checkout@v2
             with:
                 repository: aws-samples/automated-security-helper 
-                path: ../ash
+                path: ./ash
           
           - name: Run automated security helper
             run: |
@@ -43,9 +43,8 @@
                 ls
                 echo parentDir
                 ls ..
-                export PATH=$PATH:.
-                cd ../ash 
-                ash --source-dir ../visual-asset-management-system || true
+                export PATH=$PATH:../visual-asset-management-system 
+                ash 
 
           - name: Upload Report
             uses: actions/upload-artifact@v3
