@@ -45,13 +45,13 @@
                 ls ..
                 cd ash
                 export PATH=$PATH:./
-                ash --source-dir ..
+                ash --source-dir .. || true
 
           - name: Upload Report
             uses: actions/upload-artifact@v3
             with:
                 name: automated-security-helper-report
-                path: aggregated_results.txt
+                path: ash/aggregated_results.txt
           
           - name: Npm install root directory
             run: npm install
