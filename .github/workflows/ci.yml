@@ -25,6 +25,17 @@
 
           - name: Setup node for the whole package
             uses: actions/setup-node@v3
+
+          - name: Clone automated security helper
+            uses: actions/checkout@v2
+            with:
+                repository: aws-samples/automated-security-helper 
+                path: ./
+          
+          - name: Run automated security helper
+            run: | 
+                export PATH=$PATH:./
+                ash
           
           - name: Npm install root directory
             run: npm install
