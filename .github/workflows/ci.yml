@@ -30,11 +30,12 @@
             uses: actions/checkout@v2
             with:
                 repository: aws-samples/automated-security-helper 
-                path: ./
+                path: .
           
           - name: Run automated security helper
             run: | 
-                export PATH=$PATH:./
+                ls
+                export PATH=$PATH:.
                 ash --source-dir .. || true
 
           - name: Create Scout Suite Report
