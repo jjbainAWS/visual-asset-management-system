@@ -13,7 +13,7 @@
           - name: Checkout repo
             uses: actions/checkout@v3
                 with:
-                path: ./vams
+                    path: ./vams
 
           - name: Setup Python Version
             uses: actions/setup-python@v2
