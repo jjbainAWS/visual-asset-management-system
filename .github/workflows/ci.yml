@@ -25,12 +25,17 @@
 
           - name: Setup node for the whole package
             uses: actions/setup-node@v3
+          
+          -- name: Check Directory
+            run: |
+                echo thisDir 
+                ls
 
           - name: Clone automated security helper
             uses: actions/checkout@v2
             with:
                 repository: aws-samples/automated-security-helper 
-                path: .
+                path: ./ash
           
           - name: Run automated security helper
             run: |
@@ -41,7 +46,7 @@
                 export PATH=$PATH:.
                 ash --source-dir ../visual-asset-management-system || true
 
-          - name: Create Scout Suite Report
+          - name: Upload Report
             uses: actions/upload-artifact@v3
             with:
                 name: automated-security-helper-report
