@@ -34,9 +34,11 @@
                 ls
           
           - name: Npm install root directory
+            working-directory: vams
             run: npm install
             
           - name: Npm audit root directory
+            working-directory: vams
             run:  npm audit
 
           - name: Install Poetry Action
@@ -51,31 +53,31 @@
           - name: Run yarn install web directory
             uses: Borales/actions-yarn@v4.2.0
             with:
-                dir: 'web'
+                dir: 'vams/web'
                 cmd: install
           
           - name: Run yarn audit web directory
             uses: Borales/actions-yarn@v4.2.0
             with:
-                dir: "web"
+                dir: "vams/web"
                 cmd: audit
 
           - name: Web build
-            working-directory: web
+            working-directory: vams/web
             env:
                 CI: ""
             run: npm run build
               
           - name: Npm install infrastructure directory
-            working-directory: infra
+            working-directory: vams/infra
             run: npm install
 
           - name: Npm audit infrastructure directory
-            working-directory: infra
+            working-directory: vams/infra
             run: npm audit
 
           - name: Synthesize Cloudformation templates
-            working-directory: infra
+            working-directory: vams/infra
             run: |
                 CDK_NAG_ENABLED=true
                 export STACK_NAME=CfnNagTest
@@ -107,15 +109,15 @@
           - name: Scan VAMS WAF Cloudformation template
             uses: stelligent/cfn_nag@master
             with:
-                input_path: infra/cdk.out/vams-waf-CfnNagTest-us-east-1.template.json
+                input_path: vams/infra/cdk.out/vams-waf-CfnNagTest-us-east-1.template.json
           
           - name: Scan VAMS Cloudformation template
             uses: stelligent/cfn_nag@master
             with:
-                input_path: infra/cdk.out/vams-CfnNagTest-us-east-1.template.json
+                input_path: vams/infra/cdk.out/vams-CfnNagTest-us-east-1.template.json
 
           - name: run checks
-            working-directory: backend
+            working-directory: vams/backend
             run: make all
 
 
