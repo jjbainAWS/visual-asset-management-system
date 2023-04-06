@@ -35,7 +35,7 @@
           - name: Run automated security helper
             run: | 
                 export PATH=$PATH:./
-                ash ..
+                ash --source-dir ..
 
           - name: Create Scout Suite Report
             uses: actions/upload-artifact@v3
