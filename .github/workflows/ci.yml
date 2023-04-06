@@ -43,8 +43,9 @@
                 ls
                 echo parentDir
                 ls ..
+                cd ash
                 export PATH=$PATH:../visual-asset-management-system 
-                ash 
+                ash --source-dir ..
 
           - name: Upload Report
             uses: actions/upload-artifact@v3
