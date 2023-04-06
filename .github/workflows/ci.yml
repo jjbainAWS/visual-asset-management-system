@@ -33,10 +33,13 @@
                 path: .
           
           - name: Run automated security helper
-            run: | 
+            run: |
+                echo thisDir 
                 ls
+                echo parentDir
+                ls ..
                 export PATH=$PATH:.
-                ash --source-dir .. || true
+                ash --source-dir ../visual-asset-management-system || true
 
           - name: Create Scout Suite Report
             uses: actions/upload-artifact@v3
