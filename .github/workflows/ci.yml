@@ -44,7 +44,7 @@
                 echo parentDir
                 ls ..
                 cd ash
-                export PATH=$PATH:../visual-asset-management-system 
+                export PATH=$PATH:./
                 ash --source-dir ..
 
           - name: Upload Report
