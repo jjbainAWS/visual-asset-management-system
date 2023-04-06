@@ -12,6 +12,8 @@
           steps:
           - name: Checkout repo
             uses: actions/checkout@v3
+                with:
+                path: ./vams
 
           - name: Setup Python Version
             uses: actions/setup-python@v2
@@ -30,28 +32,6 @@
             run: |
                 echo thisDir 
                 ls
-
-          - name: Clone automated security helper
-            uses: actions/checkout@v2
-            with:
-                repository: aws-samples/automated-security-helper 
-                path: ./ash
-          
-          - name: Run automated security helper
-            run: |
-                echo thisDir 
-                ls
-                echo parentDir
-                ls ..
-                cd ash
-                export PATH=$PATH:./
-                ash --source-dir .. || true
-
-          - name: Upload Report
-            uses: actions/upload-artifact@v3
-            with:
-                name: automated-security-helper-report
-                path: ash/aggregated_results.txt
           
           - name: Npm install root directory
             run: npm install
@@ -101,6 +81,28 @@
                 export STACK_NAME=CfnNagTest
                 export REGION=us-east-1
                 npx cdk synth
+          
+          - name: Clone automated security helper
+            uses: actions/checkout@v2
+            with:
+                repository: aws-samples/automated-security-helper 
+                path: ./ash
+          
+          - name: Run automated security helper
+            run: |
+                echo thisDir 
+                ls
+                echo parentDir
+                ls ..
+                cd ash
+                export PATH=$PATH:./
+                ash --source-dir ../vams || true
+
+          - name: Upload Report
+            uses: actions/upload-artifact@v3
+            with:
+                name: automated-security-helper-report
+                path: ash/aggregated_results.txt
 
           - name: Scan VAMS WAF Cloudformation template
             uses: stelligent/cfn_nag@master
